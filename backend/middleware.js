@@ -1,17 +1,34 @@
-/*
-- make auth middleware function
-1. extract the token
-use split func to extract token from incoming req's authorisation header
+import jwt from 'jsonwebtoken';
 
-so user hame req bhejega jisme ek token hoga
-usko split karke hame token extract karna hai
+const auth = (req, res, next) => {
+    try{
+        // check if u got any token or not
+        console.log(req);
+        let token = req.headers.authorization;
 
-authorisation header kya hota hai?
+        if(token){
+            console.log(token);
+            token = token.split(" ")[1];
+            
+            let user = jwt.verify(token, process.env.JWT_SECRET );
 
-hame authorisation header milega user se 
+            req.username = user.username;
 
-*/
 
-import express from 'express';
+        } else {
+            return res.status(403).json({
+                message : "User unauthorised"
+            });
+        }
 
-const routes = express.Router();
+        next();
+
+    } catch (error) {
+        console.log(error);
+        res.status(403).json({
+            message : "user unauthorised"
+        });
+    }
+}
+
+module.exports = auth;
