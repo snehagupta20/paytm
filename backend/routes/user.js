@@ -1,25 +1,25 @@
 import express from "express";
-import User from '../db';
-// import jwt from 'jsonwebtoken';
-// import { JWT_SECRET } from "../config";
+import {User} from '../db.js';
+import jwt from 'jsonwebtoken';
 import zod from 'zod';
 
 const router = express.Router();
 
 // validate input using zod
 const signupBody = zod.object({
-    username:zod.string().toLowerCase(),
+    username:zod.string().email().toLowerCase(),
     firstName:zod.string(),
     lastName:zod.string(),
-    password:zod.string().min(6).toLowerCase(),
+    password:zod.string().min(6,{message: "min 6 chars req in pass"}),
 });
 
 // posting to db
-router.post('/signup', (req,res)=>{
+router.post('/signup', async (req,res)=>{
 
     // checking if user alredy exisits
-    const userExists = User.findOne(
-        { username : req.body.username },
+    const body = req.body;
+    const userExists = await User.findOne(
+        { username : body.username },
     )
     if(userExists){
         res.status(411).json({
@@ -27,36 +27,62 @@ router.post('/signup', (req,res)=>{
         })
     }
 
-    // checking if pass is valid
-    const password = req.body.password;
-    console.log(password);
-    if(!signupBody.safeParse(password)){
-        return res.status(411).json({
-            message: "min 6 chars req in password"
-        })
-    }
-
     // checking if rest of inputs are valid
-    const body = req.body;
     console.log(body);
-    const {success} = signupBody.safeParse(body);
+    const {success, error} = signupBody.safeParse(body);
     if(!success){
         return res.status(411).json({
             message: "incorrect inputs"
+            // error.issues.message
         })
     }
     
 
     // since all inputs correct, creating user
-    const user = User.create({
+    const user = await User.create({
         username: body.username,
         firstName: body.firstName,
         lastName: body.lastName,
-        password: password,
+        password: body.password,
+    });
+
+    const username = body.username;
+    const token = jwt.sign({username}, process.env.JWT_SECRET ) ;
+
+    return res.status(200).json({
+        message: "user logged in successfully", 
+        token: token,
     });
 
 
 });
+
+const signinBody = zod.object({
+    username: zod.string().email().toLowerCase(),
+    password: zod.string().min(6, {message: "min 6 char"}),
+})
+
+router.post('/signin', async (req, res) => {
+    // check if user present in db
+    const username = req.body.username;
+
+    const userExist = await User.findOne({
+        username: username,
+        password: req.body.password
+    })
+    if(!userExist){
+        return res.status(411).json({
+            message: "error while logging in"
+        })
+    }
+
+    const token = jwt.sign({username}, process.env.JWT_SECRET);
+
+    return res.status(200).json({
+        token: token
+    })
+
+})
 
 
 const userRouter = router;

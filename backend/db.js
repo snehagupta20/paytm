@@ -1,5 +1,19 @@
 import mongoose from 'mongoose';
-// import schema from mongoose;
+import dotenv from "dotenv";
+dotenv.config({ path: '.env' });
+
+const URL = process.env.MONGODB_URI;
+
+// console.log(URL);
+
+mongoose.connect(URL)
+  .then(() => {
+    console.log("successfully connected to db");
+  })
+  .catch((err) => {
+    console.log("Some error -", err);
+});
+
 
 const user = new mongoose.Schema({
     username:{
@@ -25,6 +39,4 @@ const user = new mongoose.Schema({
 // create model from schema
 const User = mongoose.model("User", user);
 
-module.exports = {
-    User
-};
+export {User} ;
