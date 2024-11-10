@@ -25,10 +25,10 @@ const auth = (req, res, next) => {
 
     } catch (error) {
         console.log(error);
-        res.status(403).json({
+        return res.status(403).json({
             message : "user unauthorised"
         });
     }
 }
 
-module.exports = auth;
+export default auth;
