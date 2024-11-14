@@ -82,7 +82,32 @@ router.post('/signin', async (req, res) => {
         token: token
     })
 
-})
+});
+
+ 
+/*
+- get the firstname or lastname from user
+- search the db for that first name & last name
+- send repsonse to user w/ message & fn, ln & username
+*/
+router.get('/bulk', async (req, res) => {
+    try{
+        // const users = await User.find({ $and : [{firstName : /^req.firstName/ }, {lastName : /^req.lastName/}]});
+        const users = await User.find({ $or : [{firstName : req.body.firstName}, {lastName : req.body.lastName}]});
+
+        console.log(users);
+
+        return res.status(200).json({
+            message : "successfully showed",
+            users : users,
+        })
+    } catch(error){
+        return res.status(411).json({
+            message : "server error occured 🥲",
+            error : error,
+        });
+    }
+});
 
 
 const userRouter = router;
