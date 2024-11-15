@@ -1,5 +1,6 @@
 import express from 'express';
 import userRouter from './user.js';
+import accountsRouter from './accounts.js';
 import zod from 'zod';
 import auth from '../middleware.js';
 import {User} from '../db.js';
@@ -8,21 +9,7 @@ import {User} from '../db.js';
 const router = express.Router();
 
 router.use('/user', userRouter);
-
-/*
-- extract user info
-- check if that info is valid or not 
-- update if valid
-- send err if not 
-
-- extract user info
-- make an empty obj to hold feilds that are provided
-- check which fields were sent
-- check if that info is valid or not 
-- update if valid
-- send err if not 
-
-*/
+router.use('/account', accountsRouter);
 
 const changeBody = zod.object({
     firstName : zod.string().optional(),
@@ -73,7 +60,6 @@ router.patch('/user', auth, async (req, res) => {
 
 });
 
-// module.exports = router;
 
 const mainRouter = router;
 export default mainRouter;
