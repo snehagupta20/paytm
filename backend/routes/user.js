@@ -1,5 +1,5 @@
 import express from "express";
-import {User} from '../db.js';
+import {Accounts, User} from '../db.js';
 import jwt from 'jsonwebtoken';
 import zod from 'zod';
 
@@ -12,6 +12,11 @@ const signupBody = zod.object({
     lastName:zod.string(),
     password:zod.string().min(6,{message: "min 6 chars req in pass"}),
 });
+
+const signinBody = zod.object({
+    username: zod.string().email().toLowerCase(),
+    password: zod.string().min(6, {message: "min 6 char"}),
+})
 
 // posting to db
 router.post('/signup', async (req,res)=>{
@@ -46,21 +51,26 @@ router.post('/signup', async (req,res)=>{
         password: body.password,
     });
 
+    const account = await Accounts.create({
+        userId : user._id,
+        balance : (Math.random()*10000)+1,
+    })
+
     const username = body.username;
+    const userId = user._id;
+    // const balance = Accounts.balance;
     const token = jwt.sign({username}, process.env.JWT_SECRET ) ;
 
     return res.status(200).json({
         message: "user logged in successfully", 
         token: token,
+        username : username,
+        userId : userId,
+        balance : balance,
     });
 
 
 });
-
-const signinBody = zod.object({
-    username: zod.string().email().toLowerCase(),
-    password: zod.string().min(6, {message: "min 6 char"}),
-})
 
 router.post('/signin', async (req, res) => {
     // check if user present in db
@@ -84,12 +94,6 @@ router.post('/signin', async (req, res) => {
 
 });
 
- 
-/*
-- get the firstname or lastname from user
-- search the db for that first name & last name
-- send repsonse to user w/ message & fn, ln & username
-*/
 router.get('/bulk', async (req, res) => {
     try{
         // const users = await User.find({ $and : [{firstName : /^req.firstName/ }, {lastName : /^req.lastName/}]});

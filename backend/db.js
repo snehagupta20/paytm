@@ -15,7 +15,7 @@ mongoose.connect(URL)
 });
 
 
-const user = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username:{
         type: String,
         required: true,
@@ -37,6 +37,21 @@ const user = new mongoose.Schema({
 });
 
 // create model from schema
-const User = mongoose.model("User", user);
+const User = mongoose.model("User", userSchema);
 
-export {User} ;
+const accountSchema = new mongoose.Schema({
+    userId : {
+        type: mongoose.Schema.Types.ObjectId,
+        red: "User",
+        required: true,
+    },
+    balance : {
+        type: Number,
+        required: true,
+    },
+
+});
+
+const Accounts = mongoose.model("Accounts", accountSchema);
+
+export {User, Accounts} ;
