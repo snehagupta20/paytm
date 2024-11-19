@@ -8,6 +8,6 @@ function App() {
       <Dashboard></Dashboard>
     </>
   )
-}
+};
 
-export default App
+export default App;

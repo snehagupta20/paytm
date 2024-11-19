@@ -2,7 +2,11 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        'webkit-fill': '-webkit-fill-available',
+      }
+    },
   },
   plugins: [],
 }

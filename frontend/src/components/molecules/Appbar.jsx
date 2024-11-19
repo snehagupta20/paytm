@@ -14,7 +14,7 @@ import { UserLogo } from "../atoms/UserLogo";
 
 export default function AppBar(){
     return(
-        <nav className="flex justify-between p-4 px-6 items-center" >
+        <nav className="flex justify-between items-center p-4 px-6" >
             <div>
                 <AppHeading></AppHeading>
             </div>
