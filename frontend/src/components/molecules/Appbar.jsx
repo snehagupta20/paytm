@@ -20,7 +20,7 @@ export default function AppBar(){
             </div>
             <div className="flex items-center">
                 <h2 className="font-semibold text-xl mr-5" >Hello, User</h2>
-                <UserLogo></UserLogo>
+                <UserLogo>SG</UserLogo>
             </div>
         </nav>
     )
