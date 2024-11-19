@@ -54,19 +54,18 @@ router.post('/signup', async (req,res)=>{
     const account = await Accounts.create({
         userId : user._id,
         balance : (Math.random()*10000)+1,
-    })
+    });
 
     const username = body.username;
     const userId = user._id;
     // const balance = Accounts.balance;
-    const token = jwt.sign({username}, process.env.JWT_SECRET ) ;
+    const token = jwt.sign({username, userId}, process.env.JWT_SECRET ) ;
 
     return res.status(200).json({
         message: "user logged in successfully", 
         token: token,
         username : username,
         userId : userId,
-        balance : balance,
     });
 
 
@@ -86,7 +85,9 @@ router.post('/signin', async (req, res) => {
         })
     }
 
-    const token = jwt.sign({username}, process.env.JWT_SECRET);
+    const userId = userExist._id;
+
+    const token = jwt.sign({username, userId}, process.env.JWT_SECRET);
 
     return res.status(200).json({
         token: token
@@ -96,7 +97,6 @@ router.post('/signin', async (req, res) => {
 
 router.get('/bulk', async (req, res) => {
     try{
-        // const users = await User.find({ $and : [{firstName : /^req.firstName/ }, {lastName : /^req.lastName/}]});
         const users = await User.find({ $or : [{firstName : req.body.firstName}, {lastName : req.body.lastName}]});
 
         console.log(users);
