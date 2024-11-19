@@ -1,11 +1,12 @@
 import './App.css'
+import Dashboard from './components/compounds/Dashhboard'
 
 function App() {
 
   return (
-    <div>
-      Hello World
-    </div>
+    <>
+      <Dashboard></Dashboard>
+    </>
   )
 }
 
