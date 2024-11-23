@@ -9,18 +9,19 @@ PAYMENT NAVBAR
 */
 
 import React from "react";
-import { AppHeading } from "../atoms/Heading";
-import { UserLogo } from "../atoms/UserLogo";
+import { Heading } from "../atoms/Heading";
+import UserLogo from "../atoms/UserLogo";
+// import { UserLogo } from "../atoms/UserLogo";
 
 export default function AppBar(){
     return(
         <nav className="flex justify-between items-center p-4 px-6" >
             <div>
-                <AppHeading></AppHeading>
+                <Heading>Payments App</Heading>
             </div>
             <div className="flex items-center">
                 <h2 className="font-semibold text-xl mr-5" >Hello, User</h2>
-                <UserLogo>SG</UserLogo>
+                <UserLogo color="bg-[#f5f5f5]">SG</UserLogo>
             </div>
         </nav>
     )

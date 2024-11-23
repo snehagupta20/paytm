@@ -1,9 +1,9 @@
 import React from "react";
 
-export function UserLogo({children}){
+export default function UserLogo(props){
     return(
-        <div className="h-12 w-12 bg-[#f5f5f5] rounded-[3rem] leading-[2.8rem]">
-            <p className="text-center text-[1.2rem]">{children}</p>
+        <div className={`h-12 w-12 rounded-[3rem] leading-[2.8rem] ${props.color}`}>
+            <p className="text-center text-[1.2rem]">{props.children}</p>
         </div>
     )
 };

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import JSON_DATA from '../../../public/contacts.json';
 
-export function SearchBox(){
-    
-
+export function InputBox({children}){
     return(
-        <input type="text" value={searchItem} onChange={handleInputChange} placeholder="Search Users..." className="border-2 border-solid border-slate-300 p-[0.5rem] mt-4 mr-4 w-webkit-fill rounded-lg"></input>
+        <input type="text" className=" border border-solid border-slate-300 rounded-md p-2 my-2 w-webkit-fill" placeholder={children}></input>
     )
 };

@@ -1,9 +1,11 @@
 import React from "react";
 
-export function AppHeading(){
+export function Heading(props){
     return(
         <>
-        <h1 className="font-bold text-2xl" >Payments App</h1>
+        <h1 className={`font-bold text-2xl ${props.classname}`} >{props.children || props.name}</h1>
         </>
     )
 }
+
+// export function Heading)
