@@ -76,7 +76,7 @@ router.post('/signin', async (req, res) => {
     })
     if(!userExist){
         return res.status(411).json({
-            message: "error while logging in"
+            message: "user does not exists"
         })
     }
 

@@ -20,8 +20,6 @@ export default function Signup(){
             password : event.target.password.value
         }
 
-        // console.log("form submitted",{...formData});
-
         try {
 
             const res = await axios.post( `${BACKEND_URL}/api/v1/user/signup` , formData);
@@ -44,7 +42,7 @@ export default function Signup(){
     }
 
     return(
-        <div className="w-[25%] m-auto text-center">
+        <div className="w-[25%] m-auto text-center mt-[8%] ">
             <div>
                 <Heading>Sign Up</Heading>
                 <p>Enter your information to create an account</p>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-export function InputBox({children, type, name}){
+export function InputBox({children, type, name, onChange}){
     return(
-        <input name={name} required type={type} className=" border border-solid border-slate-300 rounded-md p-2 my-2 w-webkit-fill" placeholder={children}></input>
+        <input onChange={onChange} name={name} required type={type} className=" border border-solid border-slate-300 rounded-md p-2 my-2 w-webkit-fill" placeholder={children}></input>
     )
 };
 

@@ -10,6 +10,6 @@ export function Button(props){
 
 export function GreenButton(props){
     return(
-        <button className={`bg-green-500 text-white rounded-md px-4 w-webkit-fill py-2 ${props.classname}`}>{props.name}</button>
+        <button onClick={props.onClick} className={`bg-green-500 text-white rounded-md px-4 w-webkit-fill py-2 ${props.classname}`}>{props.name}</button>
     )
 };
