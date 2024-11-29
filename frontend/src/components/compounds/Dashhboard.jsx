@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Balance } from "../atoms/Balance";
 import AppBar from "../molecules/Appbar";
 import { Users } from "../molecules/Users";
+import Signin from "./Signin";
+import Signup from "./Signup";
 
 export default function Dashboard(){
     // showing modal

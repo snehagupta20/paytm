@@ -16,7 +16,7 @@ export function UserDetail({name, handleModalChange}){
                 <UserLogo color="bg-[#f5f5f5]">{initial}</UserLogo>
                 <Title>{name}</Title>
             </div>
-            <Button onClick={() => handleModalChange(name)}>Send Money</Button>
+            <Button classname="mr-4 " onClick={() => handleModalChange(name)}>Send Money</Button>
             
         </div>
     )

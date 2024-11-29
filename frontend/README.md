@@ -9,16 +9,6 @@ Currently, two official plugins are available:
 
 
 
-- send money button functionality
-- when i click on send money button, then the class "disply-hide" should be removed. 
-- when that removes, i want the background to go transparent, i will add opacity
-- i can use usestate.
-- when the button clicks, the usestate is updated. 
-- but, how do i send that classname to another component?
-- click on user's logo and, find 2 buttons : signup and siginiin
-- make signup and signin page
-- routing
-
-
-- state management lib - redux recoil
+- form se data collect
+- backend se connect kar do
 - 

@@ -2,7 +2,7 @@ import React from "react";
 
 export function Button(props){
     return(
-        <button onClick={props.onClick} className={`px-4 w-auto bg-black text-white rounded-md mr-4 ${props.classname}`}>
+        <button type="submit" onClick={props.onClick} className={`px-4 w-auto bg-black text-white rounded-md ${props.classname}`}>
             {props.children}
         </button>
     )

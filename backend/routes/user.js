@@ -13,11 +13,6 @@ const signupBody = zod.object({
     password:zod.string().min(6,{message: "min 6 chars req in pass"}),
 });
 
-const signinBody = zod.object({
-    username: zod.string().email().toLowerCase(),
-    password: zod.string().min(6, {message: "min 6 char"}),
-})
-
 // posting to db
 router.post('/signup', async (req,res)=>{
 
